@@ -64,7 +64,6 @@ jobs:
             # mandatory
             -Dsonar.projectKey=SkorpikFeed_Task-Manager
             -Dsonar.organization=skorpikfeed
-            -Dsonar.sources=src
             -Dsonar.inclusions=**/*.js,**/*.html,**/*.css
             -Dsonar.exclusions=**/node_modules/**,**/dist/**
             -Dsonar.test.inclusions=**/*.spec.js
