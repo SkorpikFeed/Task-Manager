@@ -17,6 +17,7 @@ function addButtonAction(element) {
 }
 
 function addNewCardAction() {
+  document.querySelector(".card-option").remove();
   const newCard = document.createElement("div");
   newCard.className = "card card-option";
   newCard.innerHTML = `          
@@ -25,7 +26,6 @@ function addNewCardAction() {
   const addCardButton = document.querySelector(".btn-add-card");
   addCardButton.addEventListener("click", (e) => {
     addNewCard();
-    document.querySelector(".card-option").remove();
     addNewCardAction();
   });
 }
