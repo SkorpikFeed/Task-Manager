@@ -103,7 +103,7 @@ function addTask(card) {
 
 function defineRow() {
   const rows = document.querySelectorAll(".card-row");
-  let minRow = null;
+  let minRow = "row0";
   let minItems = Infinity;
 
   rows.forEach((row) => {
@@ -188,3 +188,19 @@ function drop(event) {
   window._draggedElement = null;
   saveCards();
 }
+
+module.exports = {
+  addNewCardAction,
+  saveCards,
+  loadCards,
+  addTask,
+  deleteButtonAction,
+  deleteCardAction,
+  addButtonAction,
+  renameAction,
+  defineRow,
+  addNewCard,
+  allowDrop,
+  drag,
+  drop,
+};
