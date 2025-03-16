@@ -51,8 +51,15 @@ button:hover {
   width: 97%;
 }
 
+.btn-add-card {
+  font-weight: bold;
+  width: 100%;
+  line-height: 1.5;
+}
+
 .btn-add {
   justify-self: center;
+  margin-bottom: 5px;
 }
 
 .checkbox-item button {

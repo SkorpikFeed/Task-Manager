@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   addButtonAction(document);
   renameAction();
   addNewCardAction();
+  deleteCardAction(document);
 });
 
 function addButtonAction(element) {
@@ -16,8 +17,22 @@ function addButtonAction(element) {
   });
 }
 
+function deleteCardAction(element) {
+  const deleteButttons = element.querySelectorAll(".btn-delete-card");
+  deleteButttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      button.closest(".card").remove();
+      addNewCardAction();
+      saveCards();
+    });
+  });
+}
+
 function addNewCardAction() {
-  document.querySelector(".card-option").remove();
+  const cardOption = document.querySelector(".card-option");
+  if (cardOption) {
+    cardOption.remove();
+  }
   const newCard = document.createElement("div");
   newCard.className = "card card-option";
   newCard.innerHTML = `          
@@ -31,7 +46,7 @@ function addNewCardAction() {
 }
 
 function renameAction() {
-  const spans = document.querySelectorAll(".checkbox-item > span");
+  const spans = document.querySelectorAll(".card span, .card p");
   spans.forEach((span) => {
     span.addEventListener("dblclick", (e) => {
       span.contentEditable = true;
@@ -69,6 +84,10 @@ function deleteButtonAction() {
 function addTask(card) {
   const newTask = document.createElement("div");
   newTask.className = "checkbox-item";
+  newTask.draggable = true;
+  newTask.setAttribute("ondragstart", "drag(event)");
+  newTask.setAttribute("ondrop", "drop(event)");
+  newTask.setAttribute("ondragover", "allowDrop(event)");
   newTask.innerHTML = `
       <input type="checkbox" />
       <span>New Task</span>
@@ -102,16 +121,21 @@ function defineRow() {
 function addNewCard() {
   const newCard = document.createElement("div");
   newCard.className = "card";
+  newCard.setAttribute("ondrop", "drop(event)");
+  newCard.setAttribute("ondragover", "allowDrop(event)");
   newCard.innerHTML = `          
       <div class="top-bar">
         <p class="card-title">New Card</p>
-        <button>
+        <button class="btn-delete-card">
           <img src="images/trash.svg" alt="trash image" width="16px" />
         </button>
       </div>
       <button class="btn-add">Add task</button>`;
   document.getElementById(defineRow()).appendChild(newCard);
   addButtonAction(newCard);
+  deleteCardAction(newCard);
+  renameAction();
+  saveCards();
 }
 
 function saveCards() {
@@ -124,4 +148,43 @@ function loadCards() {
   if (savedCards) {
     document.getElementById("cards").innerHTML = savedCards;
   }
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drag(event) {
+  window._draggedElement = event.target;
+}
+
+function drop(event) {
+  event.preventDefault();
+  const draggedElement = window._draggedElement;
+  const target = event.target.closest(".checkbox-item, .card");
+
+  if (!draggedElement || !target) return;
+
+  if (target.classList.contains("checkbox-item")) {
+    const draggedParent = draggedElement.parentNode;
+    const targetParent = target.parentNode;
+
+    if (target !== draggedElement) {
+      const draggedNext = draggedElement.nextElementSibling;
+      const targetNext = target.nextElementSibling;
+
+      if (draggedNext === target) {
+        targetParent.insertBefore(draggedElement, targetNext);
+      } else {
+        targetParent.insertBefore(draggedElement, target);
+        draggedParent.insertBefore(target, draggedNext);
+      }
+    }
+  } else if (target.classList.contains("card")) {
+    const addButton = target.querySelector(".btn-add");
+    target.insertBefore(draggedElement, addButton);
+  }
+
+  window._draggedElement = null;
+  saveCards();
 }

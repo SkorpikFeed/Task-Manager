@@ -12,29 +12,47 @@
       <!-- Default Cards -->
       <!-- First Row -->
       <div class="card-row" id="row0">
-        <div class="card">
+        <div class="card" ondrop="drop(event)" ondragover="allowDrop(event)">
           <div class="top-bar">
             <p class="card-title">To-Do</p>
-            <button>
+            <button class="btn-delete-card">
               <img src="images/trash.svg" alt="trash image" width="16px" />
             </button>
           </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="item1" name="item1" />
+          <div
+            class="checkbox-item"
+            draggable="true"
+            ondragstart="drag(event)"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <input type="checkbox" />
             <span>Object 1</span>
             <button class="btn-delete-item">
               <img src="images/xmark.svg" alt="xmark image" width="13px" />
             </button>
           </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="item1" name="item1" />
+          <div
+            class="checkbox-item"
+            draggable="true"
+            ondragstart="drag(event)"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <input type="checkbox" />
             <span>Object 2</span>
             <button class="btn-delete-item">
               <img src="images/xmark.svg" alt="xmark image" width="13px" />
             </button>
           </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="item1" name="item1" />
+          <div
+            class="checkbox-item"
+            draggable="true"
+            ondragstart="drag(event)"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <input type="checkbox" />
             <span>Object 3</span>
             <button class="btn-delete-item">
               <img src="images/xmark.svg" alt="xmark image" width="13px" />
@@ -45,22 +63,42 @@
       </div>
       <!-- Second Row -->
       <div class="card-row" id="row1">
-        <div class="card">
+        <div class="card" ondrop="drop(event)" ondragover="allowDrop(event)">
           <div class="top-bar">
             <p class="card-title">In Progress</p>
-            <button>
-              <img src="images/trash.svg" alt="trash image" width="16px" />
+            <button class="btn-delete-card">
+              <img
+                src="images/trash.svg"
+                alt="trash image"
+                width="16px"
+                draggable="true"
+                ondragstart="drag(event)"
+                ondrop="drop(event)"
+                ondragover="allowDrop(event)"
+              />
             </button>
           </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="item1" name="item1" />
+          <div
+            class="checkbox-item"
+            draggable="true"
+            ondragstart="drag(event)"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <input type="checkbox" />
             <span>Object 1</span>
             <button class="btn-delete-item">
               <img src="images/xmark.svg" alt="xmark image" width="13px" />
             </button>
           </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="item1" name="item1" />
+          <div
+            class="checkbox-item"
+            draggable="true"
+            ondragstart="drag(event)"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <input type="checkbox" />
             <span>Object 2</span>
             <button class="btn-delete-item">
               <img src="images/xmark.svg" alt="xmark image" width="13px" />
@@ -71,15 +109,21 @@
       </div>
       <!-- Third Row -->
       <div class="card-row" id="row2">
-        <div class="card">
+        <div class="card" ondrop="drop(event)" ondragover="allowDrop(event)">
           <div class="top-bar">
             <p class="card-title">Done</p>
-            <button>
+            <button class="btn-delete-card">
               <img src="images/trash.svg" alt="trash image" width="16px" />
             </button>
           </div>
-          <div class="checkbox-item">
-            <input type="checkbox" id="item1" name="item1" />
+          <div
+            class="checkbox-item"
+            draggable="true"
+            ondragstart="drag(event)"
+            ondrop="drop(event)"
+            ondragover="allowDrop(event)"
+          >
+            <input type="checkbox" />
             <span>Object 1</span>
             <button class="btn-delete-item">
               <img src="images/xmark.svg" alt="xmark image" width="13px" />
