@@ -1,21 +1,36 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   loadCards();
   deleteButtonAction();
-  addButtonAction();
-  addRenameAction();
+  addButtonAction(document);
+  renameAction();
+  addNewCardAction();
 });
 
-function addButtonAction() {
-  const addButtons = document.querySelectorAll(".btn-add");
+function addButtonAction(element) {
+  const addButtons = element.querySelectorAll(".btn-add");
   addButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      const rowId = e.target.closest(".card-row").id;
-      addTask(rowId);
+      const card = button.closest(".card");
+      addTask(card);
     });
   });
 }
 
-function addRenameAction() {
+function addNewCardAction() {
+  const newCard = document.createElement("div");
+  newCard.className = "card card-option";
+  newCard.innerHTML = `          
+      <button class="btn-add-card">Add New Card</button>`;
+  document.getElementById(defineRow()).appendChild(newCard);
+  const addCardButton = document.querySelector(".btn-add-card");
+  addCardButton.addEventListener("click", (e) => {
+    addNewCard();
+    document.querySelector(".card-option").remove();
+    addNewCardAction();
+  });
+}
+
+function renameAction() {
   const spans = document.querySelectorAll(".checkbox-item > span");
   spans.forEach((span) => {
     span.addEventListener("dblclick", (e) => {
@@ -51,8 +66,7 @@ function deleteButtonAction() {
   });
 }
 
-function addTask(rowId) {
-  const row = document.getElementById(rowId);
+function addTask(card) {
   const newTask = document.createElement("div");
   newTask.className = "checkbox-item";
   newTask.innerHTML = `
@@ -62,12 +76,42 @@ function addTask(rowId) {
           <img src="images/xmark.svg" alt="xmark image" width="13px">
       </button>
   `;
-  row
-    .querySelector(".card")
-    .insertBefore(newTask, row.querySelector(".btn-add"));
+  card.insertBefore(newTask, card.querySelector(".btn-add"));
   saveCards();
   deleteButtonAction();
-  addRenameAction();
+  renameAction();
+}
+
+function defineRow() {
+  const rows = document.querySelectorAll(".card-row");
+  let minRow = null;
+  let minItems = Infinity;
+
+  rows.forEach((row) => {
+    const itemCount =
+      row.querySelectorAll(".checkbox-item").length +
+      row.querySelectorAll(".btn-add").length;
+    if (itemCount < minItems) {
+      minItems = itemCount;
+      minRow = row;
+    }
+  });
+  return minRow.id;
+}
+
+function addNewCard() {
+  const newCard = document.createElement("div");
+  newCard.className = "card";
+  newCard.innerHTML = `          
+      <div class="top-bar">
+        <p class="card-title">New Card</p>
+        <button>
+          <img src="images/trash.svg" alt="trash image" width="16px" />
+        </button>
+      </div>
+      <button class="btn-add">Add task</button>`;
+  document.getElementById(defineRow()).appendChild(newCard);
+  addButtonAction(newCard);
 }
 
 function saveCards() {
