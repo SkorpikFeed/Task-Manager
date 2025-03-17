@@ -10,7 +10,7 @@ const {
   deleteButtonAction,
   drag,
   drop,
-} = require("../script");
+} = require("../src/script");
 
 describe("UI Functions", () => {
   beforeEach(() => {
