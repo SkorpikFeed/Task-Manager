@@ -1,0 +1,42 @@
+@startuml
+actor User
+participant "Task Manager" as TMS
+participant "List" as L
+participant "Task" as T
+
+== Додавання ==
+User -> TMS : Add Task("New Task")
+TMS -> L: Create New Task
+L -> T: Create Blank Task
+TMS -> User : Notify("Task added successfully")
+
+User -> TMS : Add List("New List")
+TMS -> L: Create New List
+TMS -> User: Notify("List created successfully")
+
+== Видалення ==
+User -> TMS : Delete Task(TaskID)
+TMS -> L : Delete Task(TaskID)
+L -> T : Delete Task(TaskID)
+TMS -> User: Notify("Task deleted successfully")
+
+User -> TMS : Delete List(ListID)
+TMS -> L: Delete List(ListID)
+TMS -> User: Notify("List deleted successfully")
+
+== Перейменування ==
+User -> TMS : Rename Task(TaskID, "New Name")
+TMS -> L : Rename Task(TaskID, "New Name")
+L -> T : Rename Task(TaskID, "New Name")
+TMS -> User: Notify("Task renamed successfully")
+
+User -> TMS : Rename List(ListID, "New Name")
+TMS -> L: Rename List(ListID, "New Name")
+TMS -> User: Notify("List renamed successfully")
+
+== Переміщення ==
+User -> TMS : Move Task(TaskID, Position)
+TMS -> L : Move Task(TaskID, Position)
+L -> T : Move Task(TaskID, Position)
+TMS -> User: Notify("Task moved successfully")
+@enduml
