@@ -1,0 +1,32 @@
+@startuml
+class User {
+    +userId: int
+    +username: String
+    +email: String
+    +addTask(task: Task): void
+    +deleteTask(task: Task): void
+    +editTask(task: Task): void
+}
+
+class Task {
+    +taskId: int
+    +title: String
+    +description: String
+    +status: String
+    +addTask(): void
+    +editTask(): void
+    +deleteTask(): void
+    +moveTask(): void
+}
+
+class List {
+    +listId: int
+    +title: String
+    +addList(list: List): void
+    +removeList(list: List): void
+}
+
+User --> Task : "manages"
+User --> List : "owns"
+List --> Task : "contains"
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+!define USECASE
+left to right direction
+actor User
+
+rectangle "Task Manager" {
+    (Add List) as AddList
+    (Delete List) as DeleteList
+    (Edit List) as EditList
+    (Add Task) as AddTask
+    (Edit Task) as EditTask
+    (Delete Task) as DeleteTask
+    (Move Task) as MoveTask
+
+    User -- AddList
+    User -- DeleteList
+    User -- EditList
+    EditList -- AddTask
+    EditList -- EditTask
+    EditList -- DeleteTask
+    EditList -- MoveTask
+}
+@enduml
