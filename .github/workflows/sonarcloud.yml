@@ -48,7 +48,8 @@ jobs:
             -Dsonar.test.inclusions=**/*.test.js
             -Dsonar.tests=__tests__/main.test.js
             -Dsonar.inclusions=**/*.js,**/*.html,**/*.css
-            -Dsonar.sources=src # optional, default is project base directory
+            -Dsonar.sources=src 
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             #-Dsonar.exclusions=**/node_modules/**,**/dist/**
             # Comma-separated paths to directories containing main source files.
             
