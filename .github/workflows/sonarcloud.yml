@@ -26,16 +26,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
       - name: Install dependencies
-        run: npm install
-
-      - name: Run tests and generate coverage
-        run: npm test -- --coverage
+        run: yarn
+      - name: Test and coverage
+        run: yarn jest --coverage
 
       - name: Analyze with SonarCloud
 
@@ -52,7 +46,7 @@ jobs:
             -Dsonar.projectKey=SkorpikFeed_Task-Manager
             -Dsonar.organization=skorpikfeed
             -Dsonar.test.inclusions=**/*.test.js
-            -Dsonar.tests=__tests__
+            -Dsonar.tests=__tests__/main.test.js
             -Dsonar.inclusions=**/*.js,**/*.html,**/*.css
             -Dsonar.sources=src # optional, default is project base directory
             #-Dsonar.exclusions=**/node_modules/**,**/dist/**
